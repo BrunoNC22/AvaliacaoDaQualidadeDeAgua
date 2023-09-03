@@ -1,6 +1,9 @@
 <script setup>
+import HomeVue from './components/Home.vue';
 </script>
 
-<template></template>
+<template>
+  <HomeVue></HomeVue>
+</template>
 
 <style></style>
