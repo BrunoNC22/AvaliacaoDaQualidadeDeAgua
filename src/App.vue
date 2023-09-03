@@ -6,4 +6,12 @@ import HomeVue from './components/Home.vue';
   <HomeVue></HomeVue>
 </template>
 
-<style></style>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  list-style: none;
+  border: 0
+}
+</style>
