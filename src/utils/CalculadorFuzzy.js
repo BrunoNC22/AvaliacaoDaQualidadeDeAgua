@@ -1,7 +1,7 @@
-import CorAparente from "../entities/CorAparente";
-import PH from "../entities/PH";
-import Potabilidade from "../entities/Potabilidade";
-import Turbidez from "../entities/Turbidez";
+import CorAparente from "../entities/CorAparente.js";
+import PH from "../entities/PH.js";
+import Potabilidade from "../entities/Potabilidade.js";
+import Turbidez from "../entities/Turbidez.js";
 
 export default class CalculadorFuzzy {
   potabilidade;
@@ -17,9 +17,9 @@ export default class CalculadorFuzzy {
     this.corAparente = new CorAparente();
     this.turbidez = new Turbidez();
     this.ph = new PH();
-    this.potabilidadeBoa = potabilidade.listaDeClassificacoes[0];
-    this.potabilidadeAdequada = potabilidade.listaDeClassificacoes[1];
-    this.potabilidadeInadequada = potabilidade.listaDeClassificacoes[2];
+    let potabilidadeBoa = this.potabilidade.listaDeClassificacoes[0];
+    let potabilidadeAdequada = this.potabilidade.listaDeClassificacoes[1];
+    let potabilidadeInadequada = this.potabilidade.listaDeClassificacoes[2];
     this.listaDeSaida = [
       potabilidadeInadequada,
       potabilidadeAdequada,
@@ -60,23 +60,23 @@ export default class CalculadorFuzzy {
     ];
   }
 
-  calcularTrapezoidal(x, [a, b, c, d]) {
-    console.log(`Triangulação: valor ${x}. conjunto ${[a, b, c, d]}`);
-    if (x <= a || x >= d) {
+  calcularTrapezoidal(valor, [a, b, c, d]) {
+    console.log(`Triangulação: valor ${valor}. conjunto ${[a, b, c, d]}`);
+    if (valor <= a || valor >= d) {
       console.log("Retornou 0");
       return 0;
     }
-    if (x >= b && x <= c) {
+    if (valor >= b && valor <= c) {
       console.log("Retornou 1");
       return 1;
     }
-    if (a < x && x < b) {
-      let valor = (x - a) / (b - a);
+    if (a < valor && valor < b) {
+      let valor = (valor - a) / (b - a);
       console.log(`Retornou ${valor}`);
       return valor;
     }
-    if (c < x && x < d) {
-      let valor = (x - c) / (d - c);
+    if (c < valor && valor < d) {
+      let valor = (valor - c) / (d - c);
       console.log(`Retornou ${valor}`);
       return valor;
     }
@@ -92,14 +92,14 @@ export default class CalculadorFuzzy {
       for (const classificacaoTurbidez in this.turbidez.listaDeClassificacoes) {
         for (const classificacaoPH in this.ph.listaDeClassificacoes) {
           vetorDeResultadosFuzzy.push(
-            obterValorFuzzy({
+            this.obterValorFuzzy({
               pertinencia: Math.min(
-                calcularTrapezoidal(
+                this.calcularTrapezoidal(
                   entradaCorAparente,
                   this.corAparente[classficacaoCorAparente]
                 ),
-                calcularTrapezoidal(entradaPh, this.ph[classificacaoPH]),
-                calcularTrapezoidal(
+                this.calcularTrapezoidal(entradaPh, this.ph[classificacaoPH]),
+                this.calcularTrapezoidal(
                   entradaTurbidez,
                   this.turbidez[classificacaoTurbidez]
                 )
@@ -134,7 +134,7 @@ export default class CalculadorFuzzy {
   }
 
   calcularPotabilidade(entradaCorAparente, entradaPh, entradaTurbidez) {
-    const rules = calcularFuzzy(entradaCorAparente, entradaPh, entradaTurbidez);
+    const rules = this.calcularFuzzy(entradaCorAparente, entradaPh, entradaTurbidez);
     let numerador = 0;
     let denominator = 0;
 
