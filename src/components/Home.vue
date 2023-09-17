@@ -1,17 +1,16 @@
 <script setup>
-import graficVue from './grafic.vue';
-import grafic2 from './grafic2.vue';
+import GraficoCorAparenteVue from './graficos/GraficoCorAparente.vue';
 </script>
 
 <template>
     <h1>Controle de temperatura utilizando logica fuzzy</h1>
     <div class="grafico">
-        <grafic2></grafic2>
+        <GraficoCorAparenteVue></GraficoCorAparenteVue>
     </div>
 </template>
 <style>
 .grafico {
-    width: 1000px;
-    height: 500px;
+    width: 500px;
+    height: 250px;
 }
 </style>

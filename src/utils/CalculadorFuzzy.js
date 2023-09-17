@@ -52,7 +52,7 @@ export default class CalculadorFuzzy {
     ];
   }
 
-  #calcularTrapezoidal(valorRecebido, [a, b, c, d]) {
+  calcularPertinenciaTrapezoidal(valorRecebido, [a, b, c, d]) {
     console.log(`Triangulação: valorRecebido ${valorRecebido}. conjunto ${[a, b, c, d]}`);
     if (valorRecebido <= a || valorRecebido >= d) {
       console.log("Retornou 0");
@@ -68,7 +68,7 @@ export default class CalculadorFuzzy {
       return valor;
     }
     if (c < valorRecebido && valorRecebido < d) {
-      let valor = (valorRecebido - c) / (d - c);
+      let valor = 1 - (valorRecebido - c) / (d - c);
       console.log(`Retornou ${valor}`);
       return valor;
     }
@@ -89,15 +89,15 @@ export default class CalculadorFuzzy {
 
           console.log(`Iteração atual ${contador}`)
           console.log(`Cor aparente em ${classficacaoCorAparente}, Turbidez em ${classificacaoTurbidez}, PH em ${classificacaoPH} `)
-          let pertinenciaCorAparente = this.#calcularTrapezoidal(
+          let pertinenciaCorAparente = this.calcularPertinenciaTrapezoidal(
             entradaCorAparente,
             this.corAparente[classficacaoCorAparente]
           )
-          let pertinenciaPh = this.#calcularTrapezoidal(
+          let pertinenciaPh = this.calcularPertinenciaTrapezoidal(
             entradaPh,
             this.ph[classificacaoPH]
           )
-          let pertinenciaTurbidez = this.#calcularTrapezoidal(
+          let pertinenciaTurbidez = this.calcularPertinenciaTrapezoidal(
             entradaTurbidez,
             this.turbidez[classificacaoTurbidez]
           )
@@ -138,13 +138,13 @@ export default class CalculadorFuzzy {
   }
 
   #obterConjuntoPertencente(entrada) {
-    if(this.#calcularTrapezoidal(entrada, this.potabilidade.boa) > 0) {
+    if(this.calcularPertinenciaTrapezoidal(entrada, this.potabilidade.boa) > 0) {
       return 'boa'
     }
-    else if (this.#calcularTrapezoidal(entrada, this.potabilidade.adequada) > 0) {
+    else if (this.calcularPertinenciaTrapezoidal(entrada, this.potabilidade.adequada) > 0) {
       return 'adequada'
     }
-    else if (this.#calcularTrapezoidal(entrada, this.potabilidade.inadequada) > 0) {
+    else if (this.calcularPertinenciaTrapezoidal(entrada, this.potabilidade.inadequada) > 0) {
       return 'inadequada'
     }
     else if (entrada > 1.3) {
