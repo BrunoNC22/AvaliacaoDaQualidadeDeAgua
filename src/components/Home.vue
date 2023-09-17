@@ -1,5 +1,10 @@
 <script setup>
 import { onMounted } from 'vue'
+
+import GraficoCorAparente from './graficos/GraficoCorAparente.vue';
+import GraficoPH from './graficos/GraficoPH.vue'
+import GraficoTurbidez from './graficos/GraficoTurbidez.vue'
+import GraficoPotabilidade from './graficos/GraficoPotabilidade.vue'
 onMounted(() => {
   var scrollSpy = new bootstrap.ScrollSpy(document.body, {
     target: '#navbar-example'
@@ -25,10 +30,14 @@ onMounted(() => {
                 <a class="nav-link ms-3 my-1" href="#item-2-1">Variáveis de Entrada</a>
                 <a class="nav-link ms-3 my-1" href="#item-2-2">Variável de Saída</a>
               </nav>
-              <a class="nav-link" href="#item-3">A Base de regras</a>
+              <a class="nav-link" href="#item-3">Graficos</a>
               <nav class="nav nav-pills flex-column">
-                <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-                <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+                <a class="nav-link ms-3 my-1" href="#item-3-1">Grafico 1</a>
+              </nav>
+              <a class="nav-link" href="#item-4">A Base de regras</a>
+              <nav class="nav nav-pills flex-column">
+                <a class="nav-link ms-3 my-1" href="#item-4-1">Item 3-1</a>
+                <a class="nav-link ms-3 my-1" href="#item-4-2">Item 3-2</a>
               </nav>
             </nav>
           </nav>
@@ -82,25 +91,61 @@ onMounted(() => {
           <br>
           <h5 id="item-2-1">Variáveis de Entrada</h5>
           <p>Assim, as variáveis de entrada escolhidas para o SBRF foram:</p>
-          <p>1. Cor Aparente (medida em UH - Unidade Hazen) <br>
-            2. pH (potencial Hidrogeniônico), ou seja, concentração de íons de Hidrogênio<br>
-            3. Turbidez (causada pela presença de substâncias suspensas e coloidais, determinada pela quantidade de luz
+          <p>1. <b>Cor Aparente</b> (medida em UH - Unidade Hazen). A escala Hazen, também conhecida como escala APHA, é
+            utilizada
+            para avaliar derivados de óleos, derivados de petróleo, além de solventes, plásticos e fármacos.
+          </p>
+          <div class="img-box">
+            <img src="../../public/Scala-Apha-Hazen-600x159.jpg" alt="">
+          </div>
+          <p>2. <b>pH</b> (potencial Hidrogeniônico), ou seja, concentração de íons de Hidrogênio</p>
+          <div class="img-box">
+            <img src="../../public/escala_de_ph.png" alt="">
+          </div>
+          <p>
+            3. <b>Turbidez</b> (causada pela presença de substâncias suspensas e coloidais, determinada pela quantidade de
+            luz
             dispersada quando ela passa através de uma amostra e é medida em UT - Unidade de Turbidez, ou seja, unidades
             de cor).</p>
+          <div class="img-box">
+            <img src="../../public/PARAMETRO_TURBIDEZ.png" alt="">
+          </div>
           <p>Além dessas três variáveis abordadas, outras poderiam ser utilizadas, tais como: cloro ativo, Escherichia
             coli, nível de flúor, quantidade de coliformes fecais e totais.</p>
           <h5 id="item-2-2">Variável de saída</h5>
-          <p>A variável de saída é a <b>Potabilidade da água</b>, com os termos linguísticos: <b>boa, adequada e
-              inadequada para
-              o consumo</b>.</p>
-          <br>
-          <br>
-          <h4 id="item-3">A Base de regras</h4>
+          <p>A variável de saída é a <b>Potabilidade da água</b>, com os termos linguísticos: <b></b> <b>boa</b>,
+            <b>adequada</b> e
+            <b>inadequada</b> para o consumo.
+          </p>
+          <h5 id="item-3">Gráficos</h5>
+          <h6 id="item-3-1">
+            <div>
+              <GraficoCorAparente class="grafico"></GraficoCorAparente>
+            </div>
+          </h6>
+          <h6 id="item-3-2">
+            <div>
+              <GraficoPH class="grafico"></GraficoPH>
+            </div>
+          </h6>
+          <h6 id="item-3-3">
+            <div>
+              <GraficoTurbidez class="grafico"></GraficoTurbidez>
+            </div>
+          </h6>
+          <h6 id="item-3-4">
+            <div>
+              <GraficoPotabilidade class="grafico"></GraficoPotabilidade>
+            </div>
+          </h6>
+
+
+          <h4 id="item-4">A Base de regras</h4>
           <p>A base de regras de um sistema fuzzy estabelece uma relação entre as variáveis independentes. Para uma melhor
             descrição dessas regras, foram organizadas três tabelas de dupla entrada, fixando o pH nas linhas e a Turbidez
             nas colunas e variando a Cor Aparente em cada tabela. Como resultado, temos as 36 combinações que determinam
             as condições da variável dependente Qualidade da Água.</p>
-          <h5 id="item-3-1">Item 3-1</h5>
+          <h5 id="item-4-1">Item 4-1</h5>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque cumque beatae eaque excepturi
             distinctio unde. A quos blanditiis temporibus natus aut dolor, soluta possimus consequatur beatae in
             aperiam facere, ut, excepturi quae reprehenderit quo? Totam pariatur quidem voluptas vel. Inventore
@@ -109,7 +154,7 @@ onMounted(() => {
             cumque ullam laboriosam quasi debitis. Corrupti, vero! Fuga laudantium est quaerat dignissimos vel
             placeat voluptatum temporibus ex aspernatur, perspiciatis iure nostrum numquam ratione adipisci
             fugit dolores dolorum deleniti officiis. Ad in nobis et.</p>
-          <h5 id="item-3-2">Item 3-2</h5>
+          <h5 id="item-4-2">Item 4-2</h5>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque cumque beatae eaque excepturi
             distinctio unde. A quos blanditiis temporibus natus aut dolor, soluta possimus consequatur beatae in
             aperiam facere, ut, excepturi quae reprehenderit quo? Totam pariatur quidem voluptas vel. Inventore
@@ -120,7 +165,6 @@ onMounted(() => {
             fugit dolores dolorum deleniti officiis. Ad in nobis et.</p>
         </div>
       </div>
-      >>>>>>> bootstrapInstallation
     </div>
   </body>
 </template>
@@ -161,12 +205,16 @@ body {
   position: relative;
 }
 
+.grafico {
+  height: 300px;
+}
+
 h4 {
   font-size: 35px;
 }
 
 h5 {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 #navbar-example3 {

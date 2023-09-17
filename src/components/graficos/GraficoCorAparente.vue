@@ -58,21 +58,21 @@ const data = {
       label: 'boa',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'blue',
+      borderColor: 'RGB(230, 186, 149)',
       data: datasetBoa
     },
     {
       label: 'adequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'red',
+      borderColor: 'RGB(159, 119, 84)',
       data: datasetAdequada
     },
     {
       label: 'inadequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'rgba(0, 0, 0, 1)',
+      borderColor: 'RGB(122, 156, 70)',
       data: datasetInadequada
     },
   ]
