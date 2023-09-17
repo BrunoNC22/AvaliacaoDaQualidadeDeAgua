@@ -3,7 +3,7 @@ export default class CorAparente {
     this.listaDeClassificacoes = ["boa", "adequada", "inadequada"];
     this.boa = [-6, -3, 3, 6];
     this.adequada = [3, 5, 15, 17];
-    this.indadequada = [13, 17, 30, 34];
+    this.inadequada = [13, 17, 30, 34];
     this.unidade = "Unidade Hazen";
   }
 }
