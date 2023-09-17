@@ -1,19 +1,11 @@
 import CorAparente from "../entities/CorAparente.js";
 import PH from "../entities/PH.js";
-import Potabilidade from "../entities/Potabilidade.js";
+import {Potabilidade} from "../entities/Potabilidade.js";
 import Turbidez from "../entities/Turbidez.js";
 
 export default class CalculadorFuzzy {
-  potabilidade;
-  corAparente;
-  turbidez;
-  ph;
-  potabilidadeBoa;
-  potabilidadeAdequada;
-  potabilidadeInadequada;
-  listaDeSaida;
   constructor() {
-    this.potabilidade = new Potabilidade();
+    this.potabilidade =  Potabilidade;
     this.corAparente = new CorAparente();
     this.turbidez = new Turbidez();
     this.ph = new PH();
@@ -60,23 +52,23 @@ export default class CalculadorFuzzy {
     ];
   }
 
-  calcularTrapezoidal(valor, [a, b, c, d]) {
-    console.log(`Triangulação: valor ${valor}. conjunto ${[a, b, c, d]}`);
-    if (valor <= a || valor >= d) {
+  #calcularTrapezoidal(valorRecebido, [a, b, c, d]) {
+    console.log(`Triangulação: valorRecebido ${valorRecebido}. conjunto ${[a, b, c, d]}`);
+    if (valorRecebido <= a || valorRecebido >= d) {
       console.log("Retornou 0");
       return 0;
     }
-    if (valor >= b && valor <= c) {
+    if (valorRecebido >= b && valorRecebido <= c) {
       console.log("Retornou 1");
       return 1;
     }
-    if (a < valor && valor < b) {
-      let valor = (valor - a) / (b - a);
+    if (a < valorRecebido && valorRecebido < b) {
+      let valor = (valorRecebido - a) / (b - a);
       console.log(`Retornou ${valor}`);
       return valor;
     }
-    if (c < valor && valor < d) {
-      let valor = (valor - c) / (d - c);
+    if (c < valorRecebido && valorRecebido < d) {
+      let valor = (valorRecebido - c) / (d - c);
       console.log(`Retornou ${valor}`);
       return valor;
     }
@@ -86,24 +78,35 @@ export default class CalculadorFuzzy {
   calcularFuzzy(entradaCorAparente, entradaPh, entradaTurbidez) {
     const vetorDeResultadosFuzzy = [];
 
-    const contador = 0;
-    for (const classficacaoCorAparente in this.corAparente
-      .listaDeClassificacoes) {
-      for (const classificacaoTurbidez in this.turbidez.listaDeClassificacoes) {
-        for (const classificacaoPH in this.ph.listaDeClassificacoes) {
+    let contador = 0;
+    for (const classficacaoCorAparenteIndex in this.corAparente.listaDeClassificacoes) {
+      let classficacaoCorAparente = this.corAparente.listaDeClassificacoes[classficacaoCorAparenteIndex]
+      for (const classificacaoTurbidezIndex in this.turbidez.listaDeClassificacoes) {
+        let classificacaoTurbidez = this.turbidez.listaDeClassificacoes[classificacaoTurbidezIndex]
+        for (const classificacaoPHIndex in this.ph.listaDeClassificacoes) {
+          let classificacaoPH = this.ph.listaDeClassificacoes[classificacaoPHIndex]
+
+
+          console.log(`Iteração atual ${contador}`)
+          console.log(`Cor aparente em ${classficacaoCorAparente}, Turbidez em ${classificacaoTurbidez}, PH em ${classificacaoPH} `)
+          let pertinenciaCorAparente = this.#calcularTrapezoidal(
+            entradaCorAparente,
+            this.corAparente[classficacaoCorAparente]
+          )
+          let pertinenciaPh = this.#calcularTrapezoidal(
+            entradaPh,
+            this.ph[classificacaoPH]
+          )
+          let pertinenciaTurbidez = this.#calcularTrapezoidal(
+            entradaTurbidez,
+            this.turbidez[classificacaoTurbidez]
+          )
+          let pertinencia = Math.min(pertinenciaCorAparente, pertinenciaPh, pertinenciaTurbidez)
+          console.log(`Menor pertinencia ${pertinencia}`)
+          console.log(`Conjunto de potabilidade atual: ${this.potabilidade[this.listaDeSaida[contador]]}`)          
           vetorDeResultadosFuzzy.push(
             this.obterValorFuzzy({
-              pertinencia: Math.min(
-                this.calcularTrapezoidal(
-                  entradaCorAparente,
-                  this.corAparente[classficacaoCorAparente]
-                ),
-                this.calcularTrapezoidal(entradaPh, this.ph[classificacaoPH]),
-                this.calcularTrapezoidal(
-                  entradaTurbidez,
-                  this.turbidez[classificacaoTurbidez]
-                )
-              ),
+              pertinencia,
               conjunto: this.potabilidade[this.listaDeSaida[contador]],
             })
           );
@@ -126,15 +129,36 @@ export default class CalculadorFuzzy {
       return { numerador: somaNumerador, denominator: somaDenominador };
     }
     if (pertinencia > 0 && pertinencia < 1) {
-      let numerador = pertinencia * (d - c) + c + (pertinencia * (b - a) + a);
       let denominator = 2 * pertinencia;
+      let numerador = ((pertinencia * (b - a)) + a)*pertinencia
+       + ((pertinencia * (d - c)) + c)*pertinencia
       return { numerador, denominator };
     }
     return { numerador: 0, denominator: 0 };
   }
 
-  calcularPotabilidade(entradaCorAparente, entradaPh, entradaTurbidez) {
-    const rules = this.calcularFuzzy(entradaCorAparente, entradaPh, entradaTurbidez);
+  #obterConjuntoPertencente(entrada) {
+    if(this.#calcularTrapezoidal(entrada, this.potabilidade.boa) > 0) {
+      return 'boa'
+    }
+    else if (this.#calcularTrapezoidal(entrada, this.potabilidade.adequada) > 0) {
+      return 'adequada'
+    }
+    else if (this.#calcularTrapezoidal(entrada, this.potabilidade.inadequada) > 0) {
+      return 'inadequada'
+    }
+    else if (entrada > 1.3) {
+      return 'valor não esperado'
+    }
+    return 'erro ao calcular o conjunto pertencente'
+  }
+
+  calcularPotabilidade({entradaCorAparente, entradaPh, entradaTurbidez}) {
+    const rules = this.calcularFuzzy(
+      entradaCorAparente,
+      entradaPh,
+      entradaTurbidez
+    );
     let numerador = 0;
     let denominator = 0;
 
@@ -148,6 +172,10 @@ export default class CalculadorFuzzy {
       return 0; // Evitar divisão por zero
     }
 
-    return numerador / denominator;
+    let valorDePotabilidade = numerador / denominator
+    return {
+      valorDePotabilidade,
+      conjuntoPertencente: this.#obterConjuntoPertencente(valorDePotabilidade)
+    };
   }
 }
