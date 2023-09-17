@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
 
+import Interaction from './Interaction.vue'
+
 import GraficoCorAparente from './graficos/GraficoCorAparente.vue';
 import GraficoPH from './graficos/GraficoPH.vue'
 import GraficoTurbidez from './graficos/GraficoTurbidez.vue'
@@ -163,6 +165,7 @@ onMounted(() => {
             cumque ullam laboriosam quasi debitis. Corrupti, vero! Fuga laudantium est quaerat dignissimos vel
             placeat voluptatum temporibus ex aspernatur, perspiciatis iure nostrum numquam ratione adipisci
             fugit dolores dolorum deleniti officiis. Ad in nobis et.</p>
+          <Interaction></Interaction>
         </div>
       </div>
     </div>
