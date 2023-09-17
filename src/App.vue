@@ -12,6 +12,5 @@ import HomeVue from './components/Home.vue';
   margin: 0;
   vertical-align: baseline;
   list-style: none;
-  border: 0
 }
 </style>
