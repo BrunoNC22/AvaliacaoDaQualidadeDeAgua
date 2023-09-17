@@ -55,24 +55,24 @@ const data = {
   labels: eixoX
   , datasets: [
     {
-      label: 'boa',
+      label: 'Boa',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'RGB(230, 186, 149)',
       data: datasetBoa
     },
     {
-      label: 'adequada',
+      label: 'Adequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'RGB(159, 119, 84)',
       data: datasetAdequada
     },
     {
-      label: 'inadequada',
+      label: 'Inadequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'RGB(122, 156, 70)',
+      borderColor: 'RGB(92, 0, 0)',
       data: datasetInadequada
     },
   ]
@@ -80,7 +80,48 @@ const data = {
 
 const options = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+        display: true,
+        position: 'top',
+    },
+    title: {
+        display: true,
+        position: 'top',
+        color: 'rgb(0, 0, 0)',
+        font: {
+                size: 20
+            },
+        text: 'Cor Aparente',
+        padding: {
+            top: 10,
+            bottom: 10,
+        },
+    }
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: `${corAparente.unidade}`, // ótulo do eixo X aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: ' Grau de Pertinência ', // rótulo do eixo Y aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    }
+  }
 }     
 </script>
 

@@ -65,28 +65,28 @@ const data = {
       label: 'Bom',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'green',
+      borderColor: 'RGB(33, 154, 41)',
       data: datasetBom
     },
     {
       label: 'Adequado',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'blue',
+      borderColor: 'RGB(19, 170, 163)',
       data: datasetAdequado
     },
     {
       label: 'inadequada Baixo',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'red',
+      borderColor: 'RGB(245, 190, 1)',
       data: datasetInadequadaBaixo
     },
     {
       label: 'Inadequado Alto',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'rgba(0, 0, 0, 1)',
+      borderColor: 'RGB(82, 51, 144)',
       data: datasetInadequadoAlto
     },
   ]
@@ -94,7 +94,48 @@ const data = {
 
 const options = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+        display: true,
+        position: 'top',
+    },
+    title: {
+        display: true,
+        position: 'top',
+        color: 'rgb(0, 0, 0)',
+        font: {
+                size: 20
+            },
+        text: 'PH',
+        padding: {
+            top: 10,
+            bottom: 10,
+        },
+    }
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: `${qualidadePH.unidade}`, // ótulo do eixo X aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: ' Grau de Pertinência ', // rótulo do eixo Y aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    }
+  }
 }     
 </script>
 

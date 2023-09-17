@@ -65,14 +65,14 @@ const data = {
       label: 'Adequado',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'red',
+      borderColor: 'rgb(0, 135, 241)',
       data: datasetAdequada
     },
     {
       label: 'inadequada Baixo',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
-      borderColor: 'rgba(0, 0, 0, 1)',
+      borderColor: 'rgb(3, 101, 93)',
       data: datasetInadequada
     },
   ]
@@ -80,7 +80,48 @@ const data = {
 
 const options = {
   responsive: true,
-  maintainAspectRatio: false
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+        display: true,
+        position: 'top',
+    },
+    title: {
+        display: true,
+        position: 'top',
+        color: 'rgb(0, 0, 0)',
+        font: {
+                size: 20
+            },
+        text: 'Potabilidade',
+        padding: {
+            top: 10,
+            bottom: 10,
+        },
+    }
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: `${qualidadePotabilidade.unidade}`, // ótulo do eixo X aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: ' Grau de Pertinência ', // rótulo do eixo Y aqui
+        color: 'rgb(0, 0, 0)',
+        font: {
+          size: 12,
+        },
+      },
+    }
+  }
 }     
 </script>
 
