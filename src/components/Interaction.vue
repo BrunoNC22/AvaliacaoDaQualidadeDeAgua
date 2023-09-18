@@ -86,7 +86,7 @@ function verificaPodeCalcular() {
   </div>
   <div v-if="isResponseReceived" class="resposta">
     <div>Indice de potabilidade: {{ response.valorDePotabilidade }}</div>
-    <div>Conjunto: {{ response.conjuntoPertencente }}</div>
+    <div>Qualidade: {{ response.conjuntoPertencente }}</div>
   </div>
   <div class="grafico-box">
     <GraficoPotabilidade class="grafico-potabilidade"></GraficoPotabilidade>
