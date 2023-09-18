@@ -157,7 +157,10 @@ onMounted(() => {
           <div id="item-4-1" class="tables">
             <Tables></Tables>
           </div>
-          <Interaction></Interaction>
+          <div id="item-5">
+            <h4>Simulação</h4>
+            <Interaction></Interaction>
+          </div>
         </div>
       </div>
     </div>
