@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
-
+import Tables from './Tables.vue';
+import BotaoAbrirPdfVue from './BotaoAbrirPdf.vue';
 import Interaction from './Interaction.vue'
 
 import GraficoCorAparente from './graficos/GraficoCorAparente.vue';
@@ -34,13 +35,15 @@ onMounted(() => {
               </nav>
               <a class="nav-link" href="#item-3">Graficos</a>
               <nav class="nav nav-pills flex-column">
-                <a class="nav-link ms-3 my-1" href="#item-3-1">Grafico 1</a>
+                <a class="nav-link ms-3 my-1" href="#item-3-1">Cor Aparente</a>
+                <a class="nav-link ms-3 my-1" href="#item-3-2">PH</a>
+                <a class="nav-link ms-3 my-1" href="#item-3-3">Turbidez</a>
               </nav>
               <a class="nav-link" href="#item-4">A Base de regras</a>
               <nav class="nav nav-pills flex-column">
-                <a class="nav-link ms-3 my-1" href="#item-4-1">Item 3-1</a>
-                <a class="nav-link ms-3 my-1" href="#item-4-2">Item 3-2</a>
+                <a class="nav-link ms-3 my-1" href="#item-4-1">Tabelas de Regras</a>
               </nav>
+              <a class="nav-link" href="#item-5">Simulação</a>
             </nav>
           </nav>
         </div>
@@ -120,6 +123,8 @@ onMounted(() => {
             <b>inadequada</b> para o consumo.
           </p>
           <h5 id="item-3">Gráficos</h5>
+          <p>Para cada atributo foi feito um grafico, onde o eixo y indica a pertinencia do valor e o eixo x indica a
+            unidade de medida daquele atributo.</p>
           <h6 id="item-3-1">
             <div>
               <GraficoCorAparente class="grafico"></GraficoCorAparente>
@@ -147,31 +152,18 @@ onMounted(() => {
             descrição dessas regras, foram organizadas três tabelas de dupla entrada, fixando o pH nas linhas e a Turbidez
             nas colunas e variando a Cor Aparente em cada tabela. Como resultado, temos as 36 combinações que determinam
             as condições da variável dependente Qualidade da Água.</p>
-          <h5 id="item-4-1">Item 4-1</h5>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque cumque beatae eaque excepturi
-            distinctio unde. A quos blanditiis temporibus natus aut dolor, soluta possimus consequatur beatae in
-            aperiam facere, ut, excepturi quae reprehenderit quo? Totam pariatur quidem voluptas vel. Inventore
-            fuga labore tenetur illo nobis nam tempore dolorum accusantium aperiam aliquid sequi error, at
-            corporis possimus totam sit, minima accusamus molestiae facere culpa? Id, neque aliquid numquam
-            cumque ullam laboriosam quasi debitis. Corrupti, vero! Fuga laudantium est quaerat dignissimos vel
-            placeat voluptatum temporibus ex aspernatur, perspiciatis iure nostrum numquam ratione adipisci
-            fugit dolores dolorum deleniti officiis. Ad in nobis et.</p>
-          <h5 id="item-4-2">Item 4-2</h5>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque cumque beatae eaque excepturi
-            distinctio unde. A quos blanditiis temporibus natus aut dolor, soluta possimus consequatur beatae in
-            aperiam facere, ut, excepturi quae reprehenderit quo? Totam pariatur quidem voluptas vel. Inventore
-            fuga labore tenetur illo nobis nam tempore dolorum accusantium aperiam aliquid sequi error, at
-            corporis possimus totam sit, minima accusamus molestiae facere culpa? Id, neque aliquid numquam
-            cumque ullam laboriosam quasi debitis. Corrupti, vero! Fuga laudantium est quaerat dignissimos vel
-            placeat voluptatum temporibus ex aspernatur, perspiciatis iure nostrum numquam ratione adipisci
-            fugit dolores dolorum deleniti officiis. Ad in nobis et.</p>
+          <p>Foi feito um PDF com cada uma das 36 regras que pode ser consultado a qualquer momento:</p>
+          <BotaoAbrirPdfVue></BotaoAbrirPdfVue>
+          <div id="item-4-1" class="tables">
+            <Tables></Tables>
+          </div>
           <Interaction></Interaction>
         </div>
       </div>
     </div>
   </body>
 </template>
-<style>
+<style scoped>
 body {
   background-color: #fff;
   padding: 0px;
@@ -210,6 +202,13 @@ body {
 
 .grafico {
   height: 300px;
+}
+
+.tables {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
 h4 {
