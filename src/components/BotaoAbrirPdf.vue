@@ -20,7 +20,7 @@
     </a>
     <br />
 
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
       <defs>
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
