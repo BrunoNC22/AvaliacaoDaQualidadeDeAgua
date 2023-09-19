@@ -17,6 +17,8 @@ import {
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 
+const barElement = BarElement
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,7 +27,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  BarElement
+  barElement
 )
 
 const props = defineProps({
