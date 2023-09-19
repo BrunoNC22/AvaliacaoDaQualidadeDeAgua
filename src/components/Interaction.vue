@@ -5,11 +5,13 @@ import { Potabilidade } from '../entities/Potabilidade';
 import GraficoPotabilidade from './graficos/GraficoPotabilidade.vue';
 
 import CalculadorFuzzy from '../utils/CalculadorFuzzy';
+import PH from '../entities/PH';
 
 const inputPH = ref()
 const inputTurbidez = ref()
 const inputCorAparente = ref()
 const podeCalcular = ref(false)
+const corDaBarra = ref('')
 
 const restricoes = ref({
   minCorAparente: -6,
@@ -34,13 +36,29 @@ function obterIndiceDePotabilidade() {
     entradaPh: inputPH.value,
     entradaTurbidez: inputTurbidez.value
   })
+  corDaBarra.value = definirCorDaBarra(response.value.conjuntoPertencente)
   isResponseReceived.value = true
 }
 
 function verificaPodeCalcular() {
-  if (inputPH.value && inputTurbidez.value && inputCorAparente.value) {
-    podeCalcular.value = true
+  if (inputPH.value >= restricoes.value.minPH && inputPH.value <= restricoes.value.maxPH) {
+    if (inputTurbidez.value >= restricoes.value.minTurbidez && inputTurbidez.value <= restricoes.value.maxTurbidez) {
+      if (inputCorAparente.value >= restricoes.value.minCorAparente && inputCorAparente.value <= restricoes.value.maxCorAparente) {
+        podeCalcular.value = true
+      }
+    }
   }
+  else podeCalcular.value = false
+}
+
+function definirCorDaBarra(conjunto) {
+  const coresPorCategoria = {
+    boa: 'blue',
+    adequada: 'rgb(0, 135, 241)',
+    inadequada: 'rgb(3, 101, 93)'
+  }
+
+  return coresPorCategoria[conjunto]
 }
 </script>
 
@@ -89,7 +107,9 @@ function verificaPodeCalcular() {
     <div>Qualidade: {{ response.conjuntoPertencente }}</div>
   </div>
   <div class="grafico-box">
-    <GraficoPotabilidade class="grafico-potabilidade"></GraficoPotabilidade>
+    <GraficoPotabilidade class="grafico-potabilidade" :cor-da-barra="corDaBarra"
+      :bar-position="response.valorDePotabilidade" :show-bar-externally="isResponseReceived">
+    </GraficoPotabilidade>
   </div>
 </template>
 

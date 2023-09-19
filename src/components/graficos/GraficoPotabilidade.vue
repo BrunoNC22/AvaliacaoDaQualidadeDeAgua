@@ -1,4 +1,6 @@
 <script setup>
+import { ref, onMounted, defineProps, watch } from 'vue';
+
 import { Potabilidade } from '../../entities/Potabilidade.js';
 import CalculadorFuzzy from '../../utils/CalculadorFuzzy.js'
 
@@ -10,7 +12,8 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarElement,
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 
@@ -21,13 +24,20 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarElement,
 )
 
-const calculadorFuzzy = new CalculadorFuzzy()
-const qualidadePotabilidade =  Potabilidade
+const props = defineProps({
+  showBarExternally: Boolean, // Atributo externo para controlar a adição da barra
+  barPosition: Number, // Atributo externo para definir a posição da barra
+  corDaBarra: String
+});
 
-var eixoX = Array.from({ length: 30}, (_, i) => ((i/10)-1).toFixed(1))
+const calculadorFuzzy = new CalculadorFuzzy()
+const qualidadePotabilidade = Potabilidade
+
+var eixoX = Array.from({ length: 30 }, (_, i) => ((i / 10) - 1).toFixed(1))
 
 // Valores dos datasets de acordo com o padrão
 // boa
@@ -51,9 +61,9 @@ var datasetInadequada = eixoX.map((valor) => {
   return valorDeRetorno
 });
 
-const data = {
-  labels: eixoX
-  , datasets: [
+const data = ref({
+  labels: eixoX,
+  datasets: [
     {
       label: 'Boa',
       backgroundColor: 'transparent',
@@ -69,35 +79,35 @@ const data = {
       data: datasetAdequada
     },
     {
-      label: 'inadequada Baixo',
+      label: 'Inadequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'rgb(3, 101, 93)',
       data: datasetInadequada
     },
   ]
-}
+})
 
-const options = {
+const options = ref({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-        display: true,
-        position: 'top',
+      display: true,
+      position: 'top',
     },
     title: {
-        display: true,
-        position: 'top',
-        color: 'rgb(0, 0, 0)',
-        font: {
-                size: 20
-            },
-        text: 'Potabilidade',
-        padding: {
-            top: 10,
-            bottom: 10,
-        },
+      display: true,
+      position: 'top',
+      color: 'rgb(0, 0, 0)',
+      font: {
+        size: 20
+      },
+      text: 'Potabilidade',
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
     }
   },
   scales: {
@@ -122,10 +132,35 @@ const options = {
       },
     }
   }
-}     
+})
+
+const isNewDataSet = ref(false)
+// Função para adicionar o dataset da barra ao gráfico na posição definida
+const addBarToChart = () => {
+  isNewDataSet.value = false
+  if (data.value.datasets.length >= 4) data.value.datasets.pop()
+  data.value.datasets.push({
+    label: 'Valor de saída',
+    backgroundColor: props.corDaBarra, // Cor da barra
+    data: eixoX.map((valor) => {
+      if (valor === props.barPosition.toFixed(1)) return 1
+      else return undefined
+    }),
+    type: 'bar', // Inicialize com zeros
+    barThickness: 6,
+  });
+  isNewDataSet.value = true
+}
+
+// Assista à mudança da propriedade showBar e adicione a barra quando ela mudar
+watch(props, (newValue) => {
+  if (newValue) {
+    addBarToChart();
+  }
+});
 </script>
 
 <template>
-  <Line :data="data" :options="options" />
+  <Line :key="JSON.stringify(props)" :data="data" :options="options"></Line>
 </template>
   
