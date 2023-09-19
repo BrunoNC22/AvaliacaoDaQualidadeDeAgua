@@ -27,7 +27,7 @@ ChartJS.register(
 const calculadorFuzzy = new CalculadorFuzzy()
 const qualidadeTurbidez = new Turbidez()
 
-var eixoX = Array.from({ length: 40}, (_, i) => (i/2)-5)
+var eixoX = Array.from({ length: 40 }, (_, i) => (i / 2) - 5)
 
 // Valores dos datasets de acordo com o padrão
 // boa
@@ -69,7 +69,7 @@ const data = {
       data: datasetAdequada
     },
     {
-      label: 'inadequada Baixo',
+      label: 'Inadequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'RGB(92, 0, 0)',
@@ -83,21 +83,21 @@ const options = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-        display: true,
-        position: 'top',
+      display: true,
+      position: 'top',
     },
     title: {
-        display: true,
-        position: 'top',
-        color: 'rgb(0, 0, 0)',
-        font: {
-                size: 20
-            },
-        text: 'Turbidez',
-        padding: {
-            top: 10,
-            bottom: 10,
-        },
+      display: true,
+      position: 'top',
+      color: 'rgb(0, 0, 0)',
+      font: {
+        size: 20
+      },
+      text: 'Turbidez',
+      padding: {
+        top: 10,
+        bottom: 10,
+      },
     }
   },
   scales: {
