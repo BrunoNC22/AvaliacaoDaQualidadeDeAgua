@@ -15,19 +15,18 @@ import {
   Legend,
   BarElement,
 } from 'chart.js'
-import { Line } from 'vue-chartjs'
-
-const barElement = BarElement
+import { Line, Bar } from 'vue-chartjs'
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
-  barElement
+
 )
 
 const props = defineProps({
@@ -71,21 +70,24 @@ const data = ref({
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'blue',
-      data: datasetBoa
+      data: datasetBoa,
+      type: 'line'
     },
     {
       label: 'Adequado',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'rgb(0, 135, 241)',
-      data: datasetAdequada
+      data: datasetAdequada,
+      type: 'line'
     },
     {
       label: 'Inadequada',
       backgroundColor: 'transparent',
       pointBorderColor: 'transparent',
       borderColor: 'rgb(3, 101, 93)',
-      data: datasetInadequada
+      data: datasetInadequada,
+      type: 'line'
     },
   ]
 })
@@ -163,6 +165,6 @@ watch(props, (newValue) => {
 </script>
 
 <template>
-  <Line :key="JSON.stringify(props)" :data="data" :options="options"></Line>
+  <Bar :key="JSON.stringify(props)" :data="data" :options="options"></Bar>
 </template>
   
