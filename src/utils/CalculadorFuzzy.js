@@ -168,11 +168,17 @@ export default class CalculadorFuzzy {
       denominator += rules[indice].denominator;
     }
 
-    if (denominator === 0) {
-      return 0; // Evitar divisão por zero
+    
+    // Evitar divisão por zero
+    let valorDePotabilidade = 0
+    if (denominator === 0) { 
+      return {
+        valorDePotabilidade,
+        conjuntoPertencente: this.#obterConjuntoPertencente(valorDePotabilidade)
+      } 
     }
 
-    let valorDePotabilidade = numerador / denominator
+    valorDePotabilidade = numerador / denominator
     return {
       valorDePotabilidade,
       conjuntoPertencente: this.#obterConjuntoPertencente(valorDePotabilidade)
