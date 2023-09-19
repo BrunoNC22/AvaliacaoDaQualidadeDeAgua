@@ -25,7 +25,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  BarElement,
+  BarElement
 )
 
 const props = defineProps({
