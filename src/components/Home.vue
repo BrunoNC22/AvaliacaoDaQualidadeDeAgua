@@ -21,9 +21,10 @@ onMounted(() => {
       <div class="row conteudo">
         <div class="col-3 my-desktop-navbar">
           <nav id="navbar-example3"
-            class="navbar navbar-light bg-light flex-column align-items-start justify-content-start p-3">
-            <a class="navbar-brand" href="#titulo">Inicio</a>
+            class="minha-navbar navbar navbar-light bg-light align-items-start justify-content-start p-3">
+
             <nav class="nav nav-pills flex-column">
+              <a class="navbar-brand" href="#titulo">Inicio</a>
               <a class="nav-link active" href="#item-1">Introdução</a>
               <nav class="nav nav-pills flex-column">
                 <a class="nav-link ms-3 my-1" href="#item-1-1">Objetivo</a>
@@ -44,6 +45,7 @@ onMounted(() => {
                 <a class="nav-link ms-3 my-1" href="#item-4-1">Tabelas de Regras</a>
               </nav>
               <a class="nav-link" href="#item-5">Simulação</a>
+              <a class="nav-link" href="#item-6">Referências</a>
             </nav>
           </nav>
         </div>
@@ -166,13 +168,20 @@ onMounted(() => {
               nas colunas e variando a Cor Aparente em cada tabela. Como resultado, temos as 36 combinações que determinam
               as condições da variável dependente Qualidade da Água.</p>
             <p>Foi feito um PDF com cada uma das 36 regras que pode ser consultado a qualquer momento:</p>
-            <BotaoAbrirPdfVue></BotaoAbrirPdfVue>
+            <BotaoAbrirPdfVue url="https://drive.google.com/file/d/1w23k8zsQQu_Ksv4OGj0xTWacyQdEck24/view">
+            </BotaoAbrirPdfVue>
             <div id="item-4-1" class="tables">
               <Tables></Tables>
             </div>
             <div id="item-5">
               <h4>Simulação</h4>
               <Interaction></Interaction>
+            </div>
+            <div id="item-6">
+              <h4>Referências</h4>
+              <p>PDF do artigo original do estudo:</p>
+              <BotaoAbrirPdfVue url="https://drive.google.com/file/d/1VXqgEvHSEcHznIHmPbUdDZjegLDup452/view">
+              </BotaoAbrirPdfVue>
             </div>
           </div>
         </div>
@@ -202,9 +211,16 @@ body {
 }
 
 .my-desktop-navbar {
+  overflow-y: auto;
   position: fixed;
   width: 22%;
   height: 100%;
+  z-index: 1;
+}
+
+.minha-navbar {
+  display: flex;
+  flex-direction: column;
 }
 
 .rigth-content {
