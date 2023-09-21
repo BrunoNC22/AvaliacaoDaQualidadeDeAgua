@@ -1,8 +1,16 @@
-<script setup></script>
+<script setup>
+
+const props = defineProps({
+  url: {
+    required: true,
+    type: String,
+  }
+})
+</script>
 
 <template>
   <div class="buttons">
-    <a href="https://drive.google.com/file/d/1w23k8zsQQu_Ksv4OGj0xTWacyQdEck24/view" target="_blank">
+    <a :href="props.url" target="_blank">
       <button class="blob-btn">
         <div class="central">
           <img src="../../public/icon.png" alt="icon_PDF" id="icon_pdf">
