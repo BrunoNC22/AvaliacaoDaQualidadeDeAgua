@@ -68,7 +68,8 @@ onMounted(() => {
               tratamento, projetos educacionais sobre o uso racional e distribuição de água.
             </p>
             <div class="img-box">
-              <img class="ana-logo" src="../../public/Logotipo_ANA_-_Agência_Nacional_de_Águas_e_Saneamento_Básico.png"
+              <img class="ana-logo imagem"
+                src="../../public/Logotipo_ANA_-_Agência_Nacional_de_Águas_e_Saneamento_Básico.png"
                 alt="ANA - Agência Nacional de Águas e Saneamento Básico">
             </div>
             <br>
@@ -110,11 +111,11 @@ onMounted(() => {
               para avaliar derivados de óleos, derivados de petróleo, além de solventes, plásticos e fármacos.
             </p>
             <div class="img-box">
-              <img src="../../public/Scala-Apha-Hazen-600x159.jpg" alt="">
+              <img class="imagem" src="../../public/Scala-Apha-Hazen-600x159.jpg" alt="">
             </div>
             <p>2. <b>pH</b> (potencial Hidrogeniônico), ou seja, concentração de íons de Hidrogênio</p>
             <div class="img-box">
-              <img src="../../public/escala_de_ph.png" alt="">
+              <img class="imagem" src="../../public/escala_de_ph.png" alt="">
             </div>
             <p>
               3. <b>Turbidez</b> (causada pela presença de substâncias suspensas e coloidais, determinada pela quantidade
@@ -123,7 +124,7 @@ onMounted(() => {
               dispersada quando ela passa através de uma amostra e é medida em UT - Unidade de Turbidez, ou seja, unidades
               de cor).</p>
             <div class="img-box">
-              <img src="../../public/PARAMETRO_TURBIDEZ.png" alt="">
+              <img class="imagem" src="../../public/PARAMETRO_TURBIDEZ.png" alt="">
             </div>
             <p>Além dessas três variáveis abordadas, outras poderiam ser utilizadas, tais como: cloro ativo, Escherichia
               coli, nível de flúor, quantidade de coliformes fecais e totais.</p>
@@ -270,6 +271,18 @@ h5 {
 
   .scrollSpy {
     height: 100%;
+  }
+
+  .img-box {
+    max-width: 360px;
+  }
+
+  .ana-logo {
+    height: auto;
+  }
+
+  .imagem {
+    width: 360px;
   }
 }
 </style>
